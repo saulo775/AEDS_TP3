@@ -1,0 +1,28 @@
+
+#include <stdio.h>
+#include "stdlib.h"
+#include "headers/linha.h"
+
+int main() {
+    int teste = 0;
+    int cont = 0;
+    listaLinha l;
+    listaLinha p;
+
+    linha_CriaListaVazia(&l);
+
+    while(teste != -1){
+        printf("linha = ");
+        scanf("%d", &teste);
+        linha_InsereNovoItem(&l, teste);
+        cont ++;
+
+    }
+
+    linha_ImprimeLista(&l);
+    p = l;
+
+    printf("\nl %d", l);
+    printf("\np %d", p);
+    return 0;
+}
