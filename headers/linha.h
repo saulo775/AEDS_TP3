@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+
 typedef struct {
     int numLinha;
 }itemLinha;
@@ -8,8 +9,7 @@ typedef struct {
 typedef struct CelulaLinha* ApontadorCelulaLinha;
 typedef struct CelulaLinha {
     itemLinha line;
-    struct CelulaLinha *proxLinha;
-    //ApontadorCelulaLinha *proxLinha;
+    struct CelulaLinha* proxLinha;
 }celulaLinha;
 
 typedef struct {

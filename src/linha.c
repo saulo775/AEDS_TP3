@@ -33,7 +33,7 @@ void linha_ImprimeLista(listaLinha* pListaLinha){
     ApontadorCelulaLinha pAux;
     pAux = pListaLinha->primeiraLinha->proxLinha;
 
-    printf("Lista Linha  ");
+    printf("Linhas  ");
     while (pAux != NULL){
         printf("%d ", pAux->line.numLinha);
         pAux = pAux->proxLinha;

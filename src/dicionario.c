@@ -1,14 +1,12 @@
 #include "../headers/dicionario.h"
 #include <sys/stat.h>
 
-
-void dicio_CriaVazio(listaDicionario* pLetra){
-    printf("criei dicionario vazio");
-    pLetra->primeiraLetra = (ApontaLetra) malloc(sizeof (CelulaLetra));
+ void dicio_CriaVazio(listaDicionario *pLetra){
+    pLetra->primeiraLetra = (ApontadorLetra) malloc(sizeof (celulaLetra));
     pLetra->ultimaLetra = pLetra->primeiraLetra;
     pLetra->primeiraLetra->proxLetra = NULL;
-
 };
+
 
 int dicio_LeVazio(listaDicionario* pLetra){
     if(pLetra->primeiraLetra == pLetra->ultimaLetra){
@@ -18,19 +16,18 @@ int dicio_LeVazio(listaDicionario* pLetra){
     }
 };
 
-int dicio_VerificaLetraAlreadyExists(listaDicionario* pLetra, char letra){
-    CelulaLetra* pAux;
+
+celulaLetra dicio_VerificaLetraAlreadyExists(listaDicionario* pLetra, char inputLetra){
+    celulaLetra* pAux;
     pAux = pLetra->primeiraLetra->proxLetra;
-    if(dicio_LeVazio(pLetra) == 0) {
-        return 0;
-    }
+//    if(dicio_LeVazio(pLetra) == 0) {
+//        return ;
+//    }
     while(pAux->proxLetra != NULL){
-        printf("helo");
-        if(strcmp(&pAux->letter.caracter, &letra) == 0){
+        if(strcmp(&pAux->letter.caracter, &inputLetra) == 0){
             return 1;
         }
         pAux = pAux->proxLetra;
-
     }
     free(pAux);
     return 0;
@@ -40,7 +37,7 @@ void dicio_InsereLetra(listaDicionario* pLetra, char caractere){
 //    if (dicio_VerificaLetraAlreadyExists(pLetra, caractere) == 1){
 //        return;
 //    }
-    pLetra->ultimaLetra->proxLetra = (ApontaLetra) malloc(sizeof(CelulaLetra));
+    pLetra->ultimaLetra->proxLetra = (ApontadorLetra) malloc(sizeof(celulaLetra));
     pLetra->ultimaLetra = pLetra->ultimaLetra->proxLetra;
     strcpy(&pLetra->ultimaLetra->letter.caracter, &caractere);
     pLetra->ultimaLetra->proxLetra = NULL;
@@ -48,6 +45,7 @@ void dicio_InsereLetra(listaDicionario* pLetra, char caractere){
 
 
 void dicio_Constroi(listaDicionario* pLetra){
+
     const char* filename = "/Users/saulovictor/Desktop/UFV/2022-02/AEDS-1/semana_06/tp_03_v2/src/gabriel.txt";
     char *pt;
     int contLinha = 1;
@@ -58,15 +56,16 @@ void dicio_Constroi(listaDicionario* pLetra){
         exit(1);
     }
 
-    printf("to aqui");
     struct stat sb;
     stat(filename, &sb);
 
-    listaDicionario dicio;
+    //listaDicionario dicio;
     //itemPalavra itemPalavra;
     //TListaLinha pListaLinha;
 
-    dicio_CriaVazio(&dicio);
+    //dicio_CriaVazio(pLetra);
+
+   // printf("to aqui");
 
 
     char *file_contents = malloc(sb.st_size);
@@ -75,12 +74,13 @@ void dicio_Constroi(listaDicionario* pLetra){
 
         while(pt){
             if(dicio_VerificaLetraAlreadyExists(pLetra, pt[0]) == 0){
+                printf("%s\n", pt);
                 itemPalavra pItemPalavra;
-                strcpy(pItemPalavra.string, pt);
-
                 dicio_InsereLetra(pLetra, pt[0]);
-                printf("%s", &pLetra->primeiraLetra->proxLetra->letter.caracter);
                 itemPalavra palavra;
+
+                dicio_retornaPalavra(pLetra, pt[0]);
+
                 palavra_criaVazia(&palavra);
                 palavra_Preenche(&palavra, pt, 2);
 
@@ -115,8 +115,51 @@ void dicio_Constroi(listaDicionario* pLetra){
 
     fclose(in_file);
     exit(EXIT_SUCCESS);
+
 };
 
 
-void dicio_Imprime(listaDicionario* pLetra);
-void dicio_ImprimeDadaLetra(listaDicionario* pLista, char dadaLetra);
+void dicio_retornaPalavra(listaDicionario* pLetra, char inputLetra){
+    celulaLetra* pAux;
+    pAux = pLetra->primeiraLetra->proxLetra;
+
+    while(pAux->proxLetra != NULL){
+        if(strcmp(&pAux->letter.caracter, &inputLetra) == 0){
+
+
+            return 1;
+        }
+        pAux = pAux->proxLetra;
+    }
+    free(pAux);
+}
+
+void dicio_Imprime(listaDicionario* pLetra){
+    ApontadorLetra pAux;
+    pAux = pLetra->primeiraLetra->proxLetra;
+
+    while (pAux != NULL){
+        printf("LETRA = %d\n", pAux->letter.caracter);
+        for (int i = 0; i < MAXTAM; ++i) {
+            printf("%s/n", pAux->letter.vetorPalavra[i].string);
+        }
+        printf("\n\n\n");
+        pAux = pAux->proxLetra;
+    }
+};
+
+void dicio_ImprimeDadaLetra(listaDicionario* pLetra, char dadaLetra){
+    ApontadorLetra pAux;
+    pAux = pLetra->primeiraLetra->proxLetra;
+
+    while (pAux != NULL){
+        if (strcpy(&pAux->letter.caracter,  &dadaLetra)){
+            printf("LETRA = %d\n", pAux->letter.caracter);
+            for (int i = 0; i < MAXTAM; ++i) {
+                printf("%s\n", pAux->letter.vetorPalavra[i].string);
+            }
+            return;
+        }
+        pAux = pAux->proxLetra;
+    }
+};

@@ -1,25 +1,15 @@
 #include <stdio.h>
 #include "stdlib.h"
-#include "headers/palavra.h"
+#include "headers/dicionario.h"
+#include <string.h>
 
 int main() {
+    listaDicionario pLetra;
 
-    itemPalavra p;
-    listaLinha LISTA;
+    dicio_CriaVazio(&pLetra);
+    dicio_Constroi(&pLetra);
 
-    char* caracters = "abc";
 
-    palavra_criaVazia(&p);
-    LISTA = p.listaDeLinhasDaPalavra;
-
-    palavra_Preenche(&p, caracters, 25);
-
-    linha_CriaListaVazia(&LISTA);
-    linha_InsereNovoItem(&LISTA, 2);
-    linha_ImprimeLista(&LISTA);
-    printf("palavra %s\n", p.string);
-
-    printf("ainda dando certo");
-
+    printf("\n\n TA PRESTANDO \n\n");
     return 0;
 }
