@@ -1,36 +1,30 @@
 #include "../headers/palavra.h"
-#include "string.h"
 
- void palavra_criaVazia(){
-    itemPalavra *palavra;
+ void palavra_criaVazia(itemPalavra *palavra){
     palavra = (itemPalavra*) malloc(sizeof (itemPalavra));
 
     linha_CriaListaVazia(&palavra->listaDeLinhasDaPalavra);
-    palavra_Preenche(palavra, "perereca", 2);
- };
+    //palavra_Preenche(palavra, "perereca", 2);
+ }
 
 void palavra_Preenche(itemPalavra *palavra, char* caracteres, int inputLinha){
     palavra->string = caracteres;
 
-    //===GAMBIARRA
-    //===GAMBIARRA
-    //===GAMBIARRA
-    //===GAMBIARRA
-    for (int i = 0; i < 3; ++i) {
-        linha_InsereNovoItem(&palavra->listaDeLinhasDaPalavra, i);
-    }
+    linha_InsereNovoItem(&palavra->listaDeLinhasDaPalavra, inputLinha);
+    //palavra_Imprime(palavra);
+}
 
-    palavra_Imprime(palavra);
-};
 
 char palavra_Retorna(itemPalavra* palavra){
     return *palavra->string;
-};
+}
 
-void palavra_Imprime(itemPalavra* palavra){
+void palavra_Imprime(itemPalavra *palavra){
     printf("palavra=%s\n", palavra->string);
     linha_ImprimeLista(&palavra->listaDeLinhasDaPalavra);
-};
+}
+
+
 
 
 //=== NÃO IMPLEMENTADO ===//

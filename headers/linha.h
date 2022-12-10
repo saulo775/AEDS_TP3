@@ -18,7 +18,11 @@ typedef struct {
 }listaLinha;
 
 void linha_CriaListaVazia(listaLinha* plistaLinha);
+
 int linha_VerificaListaEstaVazia(listaLinha* pListaLinha);
+
 int linha_VerificaItemJaExiste(listaLinha* pListaLinha, int pItemLinha);
+
 void linha_ImprimeLista(listaLinha* pListaLinha);
+
 void linha_InsereNovoItem(listaLinha* pListaLinha, int numLinha);

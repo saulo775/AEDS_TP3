@@ -3,11 +3,13 @@
 
 #define MAXTAM 1000
 
+
 typedef struct {
-    char caracter;
+    void *caracter;
     int posicao;
     itemPalavra vetorPalavra[MAXTAM];
 }itemLetra;
+
 
 typedef struct CelulaLetra* ApontadorLetra;
 typedef struct CelulaLetra{
@@ -21,11 +23,16 @@ typedef struct{
 }listaDicionario;
 
 void dicio_CriaVazio(listaDicionario *pLetra);
+
 int dicio_LeVazio(listaDicionario* pLetra);
-celulaLetra dicio_VerificaLetraAlreadyExists(listaDicionario* pLetra, char letra);
+
+void dicio_VerificaLetraAlreadyExists(listaDicionario* pLetra, char inputLetra, celulaLetra *letraREF);
+
 void dicio_InsereLetra(listaDicionario* pLetra, char caractere);
+
 void dicio_Constroi(listaDicionario* pLetra);
+
 void dicio_Imprime(listaDicionario* pLetra);
 void dicio_ImprimeDadaLetra(listaDicionario* pLista, char dadaLetra);
-
-void dicio_retornaPalavra(listaDicionario *pLetra, char inputLetra);
+void dicio_retornaPalavra(celulaLetra* letraREF, itemPalavra* refPalavra, const char* inputPalavra);
+void dicio_insertPalavra(ApontadorLetra letraInsertable, itemPalavra* palavraREF);

@@ -13,7 +13,7 @@ typedef struct{
 // [x] Imprime cadeia de caracteres
 // [x] Imprime Palavra (cadeia de caracteres + TAD Lista de Números de linha)
 
-void palavra_criaVazia();
+void palavra_criaVazia(itemPalavra *palavra);
 void palavra_Preenche(itemPalavra* palavra, char* caracteres, int inputLinha);
 
 char palavra_Retorna(itemPalavra* palavra);
